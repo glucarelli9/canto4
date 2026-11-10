@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/shows/index.html", "destination": "/shows", "permanent": true },
+    { "source": "/bio/index.html", "destination": "/bio", "permanent": true }
+  ]
+}

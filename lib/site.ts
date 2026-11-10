@@ -15,6 +15,7 @@ export const SOCIAL = {
 } as const;
 
 export const YOUTUBE_VIDEO_ID = "tYkvpTuUSUs";
+export const YOUTUBE_VIDEO_TITLE = "La vida es un festival (Canciones en el camino)";
 export const SPOTIFY_EMBED = "https://open.spotify.com/embed/artist/2pm42ahOwMBST1vbdGqRAq?utm_source=generator&theme=0";
 
 export const FEATURED_SONGS = [

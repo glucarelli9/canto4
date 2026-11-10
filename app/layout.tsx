@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SITE_URL } from "@/lib/site";
+import { MotionProviders, ScrollProgress } from "@/components/motion/providers";
 import "./globals.css";
 
 const avigea = localFont({ src: "./fonts/Avigea.ttf", variable: "--font-avigea", display: "swap" });
@@ -26,7 +27,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-AR" className={`${avigea.variable} ${bahnschrift.variable}`}>
-      <body className="flex min-h-dvh flex-col">{children}</body>
+      <body className="flex min-h-dvh flex-col">
+        <MotionProviders>
+          <ScrollProgress />
+          {children}
+        </MotionProviders>
+      </body>
     </html>
   );
 }

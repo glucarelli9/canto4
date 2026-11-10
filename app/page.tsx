@@ -7,6 +7,13 @@ import { ShowCard } from "@/components/show-card";
 import { getUpcomingShows } from "@/lib/shows";
 import { SPOTIFY_EMBED, YOUTUBE_VIDEO_ID } from "@/lib/site";
 
+const HERO_BARS = [
+  { left: "40%", height: "30%" },
+  { left: "45%", height: "40%" },
+  { left: "50%", height: "50%" },
+  { left: "55%", height: "36%" },
+];
+
 export default async function Home() {
   const shows = await getUpcomingShows();
   const next = shows?.slice(0, 3) ?? [];
@@ -17,7 +24,7 @@ export default async function Home() {
       <main className="flex-1">
         <section aria-label="Canto 4" className="relative">
           <h1 className="sr-only">Canto 4 - Banda Oficial</h1>
-          <div className="mx-auto max-w-4xl px-4 pt-6 sm:pt-10">
+          <div className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-6 sm:pt-10">
             <Image
               src="/img/logo-c4.png"
               alt=""
@@ -36,10 +43,18 @@ export default async function Home() {
               sizes="(min-width: 896px) 896px, 100vw"
               className="relative -mt-[22%] h-auto w-full"
             />
+            {HERO_BARS.map((bar, i) => (
+              <span
+                key={bar.left}
+                aria-hidden
+                className="bar-rise absolute bottom-0 w-6 bg-primary/70 md:w-8"
+                style={{ left: bar.left, height: bar.height, animationDelay: `${0.3 + i * 0.12}s` }}
+              />
+            ))}
           </div>
         </section>
 
-        <div className="slant-top -mt-[14vw] bg-primary pt-[16vw] text-primary-foreground md:-mt-[10vw] md:pt-[12vw]">
+        <div className="slant-top relative z-10 -mt-[14vw] bg-primary pt-[16vw] text-primary-foreground md:-mt-[10vw] md:pt-[12vw]">
           <section id="miranos" className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 md:grid-cols-2 md:gap-12 md:py-16">
             <div className="text-center md:text-left">
               <h2 className="display text-6xl sm:text-7xl lg:text-8xl">
@@ -83,7 +98,7 @@ export default async function Home() {
           </section>
         </div>
 
-        <div className="slant-top relative -mt-[12vw] overflow-hidden bg-ink pt-[14vw] text-white md:-mt-[8vw] md:pt-[10vw]">
+        <div className="slant-top relative z-20 -mt-[12vw] overflow-hidden bg-ink pt-[14vw] text-white md:-mt-[8vw] md:pt-[10vw]">
           <Image
             src="/img/muro-de-hormigon-de-colores-palidos.jpg"
             alt=""

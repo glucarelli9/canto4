@@ -23,7 +23,8 @@ export function SiteHeader() {
     if (!open) return;
     const prev = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
-    closeRef.current?.focus();
+    // Sin preventScroll, enfocar el botón mientras el panel sigue fuera de pantalla desplaza el contenedor y rompe la animación.
+    closeRef.current?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     const toggle = toggleRef.current;
@@ -72,7 +73,7 @@ export function SiteHeader() {
 
       {/* Fuera del <header>: su backdrop-blur convertiría al header en el contenedor de los elementos fixed. */}
       <div
-        className={`fixed inset-0 z-50 overflow-hidden md:hidden ${open ? "visible" : "invisible"}`}
+        className={`fixed inset-0 z-50 overflow-clip md:hidden ${open ? "visible" : "invisible"}`}
         aria-hidden={!open}
       >
         <div

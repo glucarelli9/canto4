@@ -57,6 +57,19 @@ body {
     clip-path: polygon(0 12vw, 100% 0, 100% 100%, 0 100%);
   }
 
+  .bar-rise {
+    animation: bar-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes bar-rise {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
   @media (min-width: 768px) {
     .slant-top {
       clip-path: polygon(0 8vw, 100% 0, 100% 100%, 0 100%);

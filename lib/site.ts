@@ -1,4 +1,4 @@
-// El sitio viejo mostraba 6058220 en el pie y 6053220 en los links tel:. Se unificó en este último.
+// Teléfono y WhatsApp de Diego S. Cruz (confirmado). El sitio viejo mostraba por error 6058220 en el pie.
 export const BOOKING_PHONE_DISPLAY = "+54 9 387 605-3220";
 export const BOOKING_PHONE_TEL = "+5493876053220";
 export const BOOKING_EMAIL = "contrataciones@canto4.com";

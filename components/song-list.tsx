@@ -12,6 +12,7 @@ export function SongList({ songs }: { songs: Song[] }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const [broken, setBroken] = useState<Set<string>>(() => new Set());
 
   useEffect(() => {
     const audio = new Audio();
@@ -22,19 +23,27 @@ export function SongList({ songs }: { songs: Song[] }) {
       setPlaying(null);
       setProgress(0);
     };
+    // Si un adelanto deja de existir, se saca el play de ese tema y queda el link a Spotify.
+    const onError = () => {
+      const failed = audio.src;
+      setBroken((prev) => new Set(prev).add(failed));
+      onEnd();
+    };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("ended", onEnd);
+    audio.addEventListener("error", onError);
     return () => {
       audio.pause();
       audio.removeEventListener("timeupdate", onTime);
       audio.removeEventListener("ended", onEnd);
+      audio.removeEventListener("error", onError);
     };
   }, []);
 
   function toggle(i: number) {
     const audio = audioRef.current;
     const src = songs[i].audio;
-    if (!audio || !src) return;
+    if (!audio || !src || broken.has(src)) return;
     if (playing === i) {
       audio.pause();
       setPlaying(null);
@@ -50,6 +59,7 @@ export function SongList({ songs }: { songs: Song[] }) {
     <ol className="space-y-1 px-2 py-2">
       {songs.map((song, i) => {
         const active = playing === i;
+        const canPlay = !!song.audio && !broken.has(song.audio);
         return (
           <li
             key={song.title}
@@ -58,7 +68,7 @@ export function SongList({ songs }: { songs: Song[] }) {
             <button
               type="button"
               onClick={() => toggle(i)}
-              disabled={!song.audio}
+              disabled={!canPlay}
               aria-pressed={active}
               aria-label={active ? `Pausar ${song.title}` : `Escuchar un adelanto de ${song.title}`}
               className="group/play relative size-12 shrink-0 overflow-hidden rounded-xl bg-white/10 disabled:cursor-default"
@@ -68,7 +78,7 @@ export function SongList({ songs }: { songs: Song[] }) {
               ) : (
                 <Music className="absolute inset-0 m-auto size-5 text-white/50" aria-hidden />
               )}
-              {song.audio && (
+              {canPlay && (
                 <span
                   className={`absolute inset-0 flex items-center justify-center bg-black/45 transition-opacity duration-300 ${
                     active ? "opacity-100" : "opacity-100 sm:opacity-0 sm:group-hover/play:opacity-100 sm:group-focus-visible/play:opacity-100"
@@ -97,7 +107,7 @@ export function SongList({ songs }: { songs: Song[] }) {
                   <div className="h-full rounded-full bg-[#1ed760] transition-[width] duration-200 ease-linear" style={{ width: `${progress * 100}%` }} />
                 </div>
               ) : (
-                <p className="text-xs text-white/50">{song.audio ? "Adelanto de 30 s" : "Escuchalo en Spotify"}</p>
+                <p className="text-xs text-white/50">{canPlay ? "Adelanto de 30 s" : "Escuchalo en Spotify"}</p>
               )}
             </div>
 

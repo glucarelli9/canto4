@@ -10,7 +10,10 @@ import { ButtonLink } from "./ui/button";
 // Acá los adelantos de 30 s suenan con un reproductor propio.
 export async function SpotifyCard() {
   const songs = await Promise.all(
-    FEATURED_SONGS.map(async (s) => ({ ...s, ...(await getTrackPreview(s.spotify)) })),
+    FEATURED_SONGS.map(async ({ preview, ...s }) => {
+      const live = await getTrackPreview(s.spotify);
+      return { ...s, audio: live.audio ?? preview, cover: live.cover };
+    }),
   );
 
   return (

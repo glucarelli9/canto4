@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { ArrowRight, BookOpen, CalendarDays, Headphones } from "lucide-react";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
 import { ShowCard } from "@/components/show-card";
 import { ShowsMarquee } from "@/components/shows-marquee";
 import { Hero } from "@/components/hero";
@@ -17,7 +15,6 @@ export default async function Home() {
 
   return (
     <>
-      <SiteHeader />
       <main className="flex-1">
         <Hero />
 
@@ -143,7 +140,6 @@ export default async function Home() {
           </div>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

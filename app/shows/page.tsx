@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { CalendarX2, Mail, Phone } from "lucide-react";
 import { siInstagram } from "simple-icons";
 import { BrandIcon } from "@/components/social-links";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
 import { ShowCard } from "@/components/show-card";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal, RevealHeading, StaggerItem, StaggerList } from "@/components/motion/reveal";
@@ -20,7 +18,6 @@ export default async function ShowsPage() {
 
   return (
     <>
-      <SiteHeader />
       <main className="flex-1 overflow-x-clip">
         <section className="relative px-4 pb-10 pt-14 text-center sm:pt-20">
           <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 -z-10 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[100px]" />
@@ -94,7 +91,6 @@ export default async function ShowsPage() {
           </Reveal>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

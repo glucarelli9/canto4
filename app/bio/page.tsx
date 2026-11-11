@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { siSpotify, siYoutube } from "simple-icons";
 import { Disc3, Music4, Sparkles, Trophy } from "lucide-react";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
 import { BrandIcon } from "@/components/social-links";
 import { Counter } from "@/components/motion/counter";
 import { Reveal, RevealHeading, StaggerItem, StaggerList } from "@/components/motion/reveal";
@@ -23,7 +21,6 @@ const STATS = [
 export default function BioPage() {
   return (
     <>
-      <SiteHeader />
       <main className="flex-1 overflow-x-clip">
         <header className="relative px-4 pb-10 pt-14 text-center sm:pt-20">
           <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 -z-10 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/15 blur-[100px]" />
@@ -164,7 +161,6 @@ export default function BioPage() {
           </Reveal>
         </article>
       </main>
-      <SiteFooter />
     </>
   );
 }

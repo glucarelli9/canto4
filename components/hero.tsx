@@ -6,11 +6,12 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// La posición sale de --bar-start y --bar-gap (definidas por breakpoint en el contenedor) para que en celular no se superpongan.
 const BARS = [
-  { left: "40%", height: "30%", beat: 1.1 },
-  { left: "45%", height: "40%", beat: 0.9 },
-  { left: "50%", height: "50%", beat: 1.3 },
-  { left: "55%", height: "36%", beat: 1 },
+  { height: "30%", beat: 1.1 },
+  { height: "40%", beat: 0.9 },
+  { height: "50%", beat: 1.3 },
+  { height: "36%", beat: 1 },
 ];
 
 export function Hero() {
@@ -23,7 +24,10 @@ export function Hero() {
   return (
     <section aria-label="Canto 4" className="relative">
       <h1 className="sr-only">Canto 4 - Banda Oficial</h1>
-      <div ref={ref} className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-6 sm:pt-10">
+      <div
+        ref={ref}
+        className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-6 [--bar-gap:8%] [--bar-start:35%] sm:pt-10 sm:[--bar-gap:6%] sm:[--bar-start:38%] md:[--bar-gap:5%] md:[--bar-start:40%]"
+      >
         <motion.div style={{ y: reduce ? 0 : logoY }}>
           <motion.div
             initial={{ opacity: 0, scale: 1.08, filter: "blur(8px)" }}
@@ -60,10 +64,10 @@ export function Hero() {
         </motion.div>
         {BARS.map((bar, i) => (
           <motion.span
-            key={bar.left}
+            key={i}
             aria-hidden
-            className="absolute bottom-0 z-[2] w-6 origin-bottom bg-primary/70 md:w-8"
-            style={{ left: bar.left, height: bar.height }}
+            className="absolute bottom-0 z-[2] w-[18px] origin-bottom bg-primary/70 sm:w-6 md:w-8"
+            style={{ left: `calc(var(--bar-start) + ${i} * var(--bar-gap))`, height: bar.height }}
             initial={{ y: "100%" }}
             animate={reduce ? { y: "0%" } : { y: "0%", scaleY: [1, 0.72, 1.06, 0.85, 1] }}
             transition={{

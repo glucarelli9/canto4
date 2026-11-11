@@ -2,6 +2,10 @@
 export const BOOKING_PHONE_DISPLAY = "+54 9 387 605-3220";
 export const BOOKING_PHONE_TEL = "+5493876053220";
 export const BOOKING_EMAIL = "contrataciones@canto4.com";
+export const BOOKING_CONTACT_NAME = "Diego S. Cruz";
+
+const WHATSAPP_TEXT = `Hola ${BOOKING_CONTACT_NAME.split(" ")[0]}! Te escribo desde canto4.com para consultar por una contratación de Canto 4.`;
+export const BOOKING_WHATSAPP = `https://wa.me/${BOOKING_PHONE_TEL.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
 
 export const SITE_URL = "https://canto4.com";
 
@@ -16,7 +20,8 @@ export const SOCIAL = {
 
 export const YOUTUBE_VIDEO_ID = "tYkvpTuUSUs";
 export const YOUTUBE_VIDEO_TITLE = "La vida es un festival (Canciones en el camino)";
-export const SPOTIFY_EMBED = "https://open.spotify.com/embed/artist/2pm42ahOwMBST1vbdGqRAq?utm_source=generator&theme=0";
+export const SPOTIFY_RELEASES = "https://open.spotify.com/artist/2pm42ahOwMBST1vbdGqRAq/discography/all";
+export const SPOTIFY_EMBED ="https://open.spotify.com/embed/artist/2pm42ahOwMBST1vbdGqRAq?utm_source=generator&theme=0";
 
 export const FEATURED_SONGS = [
   { title: "Sombra Herida", spotify: "https://open.spotify.com/track/4khBCBq5X8It0kWSlO8Yr4", youtube: "https://www.youtube.com/watch?v=DX63z05kOpA" },

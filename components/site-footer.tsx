@@ -1,7 +1,15 @@
 import Image from "next/image";
 import { Mail, Phone } from "lucide-react";
-import { BOOKING_EMAIL, BOOKING_PHONE_DISPLAY, BOOKING_PHONE_TEL } from "@/lib/site";
-import { SocialLinks } from "./social-links";
+import { siWhatsapp } from "simple-icons";
+import {
+  BOOKING_CONTACT_NAME,
+  BOOKING_EMAIL,
+  BOOKING_PHONE_DISPLAY,
+  BOOKING_PHONE_TEL,
+  BOOKING_WHATSAPP,
+} from "@/lib/site";
+import { BrandIcon, SocialLinks } from "./social-links";
+import { ButtonLink } from "./ui/button";
 
 export function SiteFooter() {
   return (
@@ -9,9 +17,13 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-6">
         <SocialLinks />
         <Image src="/img/logo-c4.png" alt="Canto 4" width={1080} height={504} className="h-20 w-auto sm:h-24" />
-        <div className="space-y-3">
+        <div className="flex flex-col items-center gap-4">
           <h2 className="text-sm font-bold uppercase tracking-widest text-primary">Management / Booking</h2>
-          <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
+          <p className="-mt-2 text-lg font-bold">{BOOKING_CONTACT_NAME}</p>
+          <ButtonLink href={BOOKING_WHATSAPP} variant="whatsapp" size="lg" icon={<BrandIcon icon={siWhatsapp} />}>
+            Escribile por WhatsApp
+          </ButtonLink>
+          <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2">
             <a
               href={`tel:${BOOKING_PHONE_TEL}`}
               className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-semibold hover:bg-primary/10"
@@ -28,7 +40,6 @@ export function SiteFooter() {
             </a>
           </div>
         </div>
-        <p className="display text-2xl normal-case text-primary">Yo Febrero y ella Carnaval.</p>
         <p className="text-xs text-muted-foreground">© Canto 4 · Salta, Argentina</p>
       </div>
     </footer>

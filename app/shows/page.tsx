@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import { CalendarX2, Mail, Phone } from "lucide-react";
-import { siInstagram } from "simple-icons";
+import { siInstagram, siWhatsapp } from "simple-icons";
 import { BrandIcon } from "@/components/social-links";
 import { ShowCard } from "@/components/show-card";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal, RevealHeading, StaggerItem, StaggerList } from "@/components/motion/reveal";
 import { getUpcomingShows } from "@/lib/shows";
-import { BOOKING_EMAIL, BOOKING_PHONE_DISPLAY, BOOKING_PHONE_TEL, SOCIAL } from "@/lib/site";
+import {
+  BOOKING_CONTACT_NAME,
+  BOOKING_EMAIL,
+  BOOKING_PHONE_DISPLAY,
+  BOOKING_PHONE_TEL,
+  BOOKING_WHATSAPP,
+  SOCIAL,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Próximos shows",
@@ -81,7 +88,16 @@ export default async function ShowsPage() {
               Contactá a nuestro equipo de management para propuestas y contrataciones.
             </p>
           </Reveal>
-          <Reveal delay={0.3} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Reveal delay={0.3} className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <ButtonLink
+              href={BOOKING_WHATSAPP}
+              variant="whatsapp"
+              size="lg"
+              icon={<BrandIcon icon={siWhatsapp} />}
+              className="w-full max-w-xs sm:w-auto"
+            >
+              WhatsApp a {BOOKING_CONTACT_NAME}
+            </ButtonLink>
             <ButtonLink href={`tel:${BOOKING_PHONE_TEL}`} variant="dark" size="lg" icon={<Phone aria-hidden />} className="w-full max-w-xs sm:w-auto">
               Llamar {BOOKING_PHONE_DISPLAY}
             </ButtonLink>

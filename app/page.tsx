@@ -7,7 +7,7 @@ import { LiteYouTube } from "@/components/lite-youtube";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal, RevealHeading, StaggerItem, StaggerList } from "@/components/motion/reveal";
 import { getUpcomingShows } from "@/lib/shows";
-import { SOCIAL, SPOTIFY_EMBED, YOUTUBE_VIDEO_ID, YOUTUBE_VIDEO_TITLE } from "@/lib/site";
+import { SOCIAL, SPOTIFY_EMBED, SPOTIFY_RELEASES, YOUTUBE_VIDEO_ID, YOUTUBE_VIDEO_TITLE } from "@/lib/site";
 
 export default async function Home() {
   const shows = await getUpcomingShows();
@@ -50,8 +50,8 @@ export default async function Home() {
                 </p>
               </Reveal>
               <Reveal delay={0.3} className="mt-7 flex justify-center md:justify-end">
-                <ButtonLink href={SOCIAL.spotify} variant="light" icon={<Headphones aria-hidden />}>
-                  Seguinos en Spotify
+                <ButtonLink href={SPOTIFY_RELEASES} variant="light" icon={<Headphones aria-hidden />} trailing={<ArrowRight aria-hidden />}>
+                  Últimos lanzamientos
                 </ButtonLink>
               </Reveal>
             </div>

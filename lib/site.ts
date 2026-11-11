@@ -21,7 +21,6 @@ export const SOCIAL = {
 export const YOUTUBE_VIDEO_ID = "tYkvpTuUSUs";
 export const YOUTUBE_VIDEO_TITLE = "La vida es un festival (Canciones en el camino)";
 export const SPOTIFY_RELEASES = "https://open.spotify.com/artist/2pm42ahOwMBST1vbdGqRAq/discography/all";
-export const SPOTIFY_EMBED ="https://open.spotify.com/embed/artist/2pm42ahOwMBST1vbdGqRAq?utm_source=generator&theme=0";
 
 export const FEATURED_SONGS = [
   { title: "Sombra Herida", spotify: "https://open.spotify.com/track/4khBCBq5X8It0kWSlO8Yr4", youtube: "https://www.youtube.com/watch?v=DX63z05kOpA" },

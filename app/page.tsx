@@ -7,7 +7,8 @@ import { LiteYouTube } from "@/components/lite-youtube";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal, RevealHeading, StaggerItem, StaggerList } from "@/components/motion/reveal";
 import { getUpcomingShows } from "@/lib/shows";
-import { SOCIAL, SPOTIFY_EMBED, SPOTIFY_RELEASES, YOUTUBE_VIDEO_ID, YOUTUBE_VIDEO_TITLE } from "@/lib/site";
+import { SOCIAL, SPOTIFY_RELEASES, YOUTUBE_VIDEO_ID, YOUTUBE_VIDEO_TITLE } from "@/lib/site";
+import { SpotifyCard } from "@/components/spotify-card";
 
 export default async function Home() {
   const shows = await getUpcomingShows();
@@ -56,15 +57,7 @@ export default async function Home() {
               </Reveal>
             </div>
             <Reveal from="left" delay={0.1} className="md:order-1">
-              <div className="overflow-hidden rounded-3xl bg-black/30 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.6)] ring-1 ring-white/20">
-                <iframe
-                  src={SPOTIFY_EMBED}
-                  title="Canto 4 en Spotify"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  className="block h-[352px] w-full"
-                />
-              </div>
+              <SpotifyCard />
             </Reveal>
           </section>
         </div>

@@ -5,6 +5,7 @@ import { MotionProviders, ScrollProgress } from "@/components/motion/providers";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const avigea = localFont({ src: "./fonts/Avigea.ttf", variable: "--font-avigea", display: "swap" });
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <SiteFooter />
         </MotionProviders>
+        <Analytics />
       </body>
     </html>
   );

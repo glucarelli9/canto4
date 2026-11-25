@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { Analytics } from "@vercel/analytics/next";
+import { PageTracker } from "@/components/page-tracker";
 import "./globals.css";
 
 const avigea = localFont({ src: "./fonts/Avigea.ttf", variable: "--font-avigea", display: "swap" });
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteFooter />
         </MotionProviders>
         <Analytics />
+        <PageTracker />
       </body>
     </html>
   );

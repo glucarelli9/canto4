@@ -18,12 +18,12 @@ export const YOUTUBE_VIDEO_ID = "tYkvpTuUSUs";
 export const SPOTIFY_EMBED = "https://open.spotify.com/embed/artist/2pm42ahOwMBST1vbdGqRAq?utm_source=generator&theme=0";
 
 export const FEATURED_SONGS = [
-  { title: "Sombra Herida", spotify: "https://open.spotify.com/track/4khBCBq5X8It0kWSlO8Yr4", youtube: "https://www.youtube.com/watch?v=DX63z05kOpA" },
-  { title: "La Trampa", spotify: "https://open.spotify.com/track/05wXUfoMltpdArT3Pd24jE", youtube: "https://www.youtube.com/watch?v=Yax1uGZEMNY" },
-  { title: "Todos A Bailar", spotify: "https://open.spotify.com/track/5rxDQkUuMTYkTU582ISPDR", youtube: "https://www.youtube.com/watch?v=xE9nBAcTrdA" },
-  { title: "El Yin y el Yang", spotify: "https://open.spotify.com/track/1TQR9jqbNWFJLp32n6hWgp", youtube: "https://www.youtube.com/watch?v=KfvzUuJBopE" },
-  { title: "Al Bailar", spotify: "https://open.spotify.com/track/10HWGAa8WAZlIpuYeaShw4", youtube: "https://www.youtube.com/watch?v=1ZM-V_5pAsM" },
-  { title: "Tu Recuerdo", spotify: "https://open.spotify.com/track/4hU19l7p1tKfZ2BHwe0eBT", youtube: "https://www.youtube.com/watch?v=jncY1iJUv_8" },
+  { title: "Sombra Herida", spotify: "https://open.spotify.com/track/1ZNtcU1sRU5qjhG5crJ5xr?si=ccb26ee6be8c47ca", youtube: "https://youtu.be/NafCorFMGXw?t=1775&si=v46ezseePl-Sv6ri" },
+  { title: "La Soñé", spotify: "https://open.spotify.com/track/0aZvzlCBzQqscbWTD9Ps51?si=4d7d807c6d7f4dde", youtube: "https://youtu.be/NafCorFMGXw?si=Gw84Bs7m9yqS_1D6&t=1570" },
+  { title: "A Todo o Nada", spotify: "https://open.spotify.com/track/1TkeCwav0EEcRiDFh3u1G7?si=c79749169caa4221", youtube: "https://youtu.be/TO_YyAYRqiw?si=sD8T3286GMygZ1vM" },
+  { title: "Madre", spotify: "https://open.spotify.com/track/1Tb2QZv8vQQQe0pw2KIbIp?si=1dbcf907242c48a3", youtube: "https://youtu.be/8PyL-UbTiCo?si=jh0DKrzKQiFm_buW" },
+  { title: "El Escondido", spotify: "https://open.spotify.com/track/1CbE6iaXyJ7TWPoINuq3Dl?si=8be9640258844ca4", youtube: "https://youtu.be/wya3ojpj9zQ?si=dRPGPr5yR9KHP63B" },
+  { title: "La Marrupeña", spotify: "https://open.spotify.com/track/4KQToftB1dAUGpqSpEz4G5?si=a9281d779de64b90", youtube: "https://youtu.be/qkX2twCw_ho?si=NtYYPHHOsGpZzsDS" },
 ] as const;
 
 export const AWARDS = [

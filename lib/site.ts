@@ -19,7 +19,7 @@ export const SOCIAL = {
 } as const;
 
 export const YOUTUBE_VIDEO_ID = "TO_YyAYRqiw";
-export const YOUTUBE_VIDEO_TITLE = "A Todo o Nada";
+export const YOUTUBE_VIDEO_TITLE = "A Todo o Nada (Video Oficial)";
 export const SPOTIFY_RELEASES = "https://open.spotify.com/artist/2pm42ahOwMBST1vbdGqRAq/discography/all";
 
 // `preview`: adelanto de 30 s tomado desde Argentina. Spotify no se lo entrega a los servidores de Vercel

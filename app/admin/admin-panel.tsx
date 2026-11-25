@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore, useTransition } from "react";
 import Link from "next/link";
-import { Loader2, LogOut, Pencil, Plus, RefreshCw, Trash2 } from "lucide-react";
+import { BarChart3, Loader2, LogOut, Pencil, Plus, RefreshCw, Trash2 } from "lucide-react";
 import { AdminError, createShow, deleteShow, listAllShows, updateShow, verifyPassword } from "@/lib/admin-api";
+import { getAnalytics, type AnalyticsStats } from "@/lib/analytics-api";
 import { sortShows, todayKeyAR, type Show, type ShowInput } from "@/lib/shows-core";
 import { refreshPublicShows } from "./actions";
 import { ShowForm } from "./show-form";
@@ -322,6 +323,90 @@ function Dashboard({ password, onLogout }: { password: string; onLogout: () => v
           onSave={save}
         />
       )}
+
+      <AnalyticsSection password={password} />
     </main>
+  );
+}
+
+function AnalyticsSection({ password }: { password: string }) {
+  const [stats, setStats] = useState<AnalyticsStats | null>(null);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function load() {
+    setLoading(true);
+    try {
+      setStats(await getAnalytics(password));
+    } catch {}
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    if (open && !stats) load();
+  }, [open]);
+
+  return (
+    <section className="mt-10 border-t border-border pt-8">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 text-xl font-bold"
+      >
+        <BarChart3 className="size-5" aria-hidden />
+        Analytics
+        <span className="text-sm font-normal text-muted-foreground">{open ? "▲" : "▼"}</span>
+      </button>
+
+      {open && (
+        <div className="mt-4">
+          {loading && !stats ? (
+            <p className="flex items-center gap-2 text-muted-foreground">
+              <Loader2 className="size-4 animate-spin" aria-hidden /> Cargando…
+            </p>
+          ) : stats ? (
+            <>
+              <div className="grid grid-cols-3 gap-3">
+                <StatCard label="Hoy" value={stats.today} />
+                <StatCard label="Últimos 7 días" value={stats.week} />
+                <StatCard label="Últimos 30 días" value={stats.month} />
+              </div>
+              {stats.topPages.length > 0 && (
+                <div className="mt-4">
+                  <h3 className="text-sm font-semibold text-muted-foreground">Páginas más visitadas (30 días)</h3>
+                  <ul className="mt-2 space-y-1">
+                    {stats.topPages.map((p) => (
+                      <li key={p.path} className="flex items-center justify-between rounded-lg bg-card px-3 py-2 text-sm ring-1 ring-black/5">
+                        <span className="truncate font-medium">{p.path}</span>
+                        <span className="ml-2 shrink-0 font-bold">{p.count}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={load}
+                disabled={loading}
+                className="mt-3 text-sm text-primary underline"
+              >
+                {loading ? "Actualizando…" : "Actualizar"}
+              </button>
+            </>
+          ) : (
+            <p className="text-sm text-muted-foreground">No se pudieron cargar los analytics.</p>
+          )}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function StatCard({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-xl bg-card p-4 text-center shadow-sm ring-1 ring-black/5">
+      <p className="text-2xl font-bold">{value.toLocaleString("es-AR")}</p>
+      <p className="mt-1 text-xs text-muted-foreground">{label}</p>
+    </div>
   );
 }

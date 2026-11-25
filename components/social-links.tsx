@@ -29,7 +29,7 @@ export function SocialLinks({ className = "", size = "md" }: { className?: strin
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Canto 4 en ${n.label}`}
-            className={`${box} flex items-center justify-center rounded-full bg-primary/10 text-foreground transition-colors hover:bg-primary hover:text-primary-foreground`}
+            className={`${box} flex items-center justify-center rounded-full bg-primary/10 text-foreground transition-[transform,background-color,color,box-shadow] duration-300 hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/30 active:scale-95`}
           >
             <BrandIcon icon={n.icon} />
           </a>

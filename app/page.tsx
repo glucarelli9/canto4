@@ -1,18 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays } from "lucide-react";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { ArrowRight, BookOpen, CalendarDays, Headphones } from "lucide-react";
 import { ShowCard } from "@/components/show-card";
+import { ShowsMarquee } from "@/components/shows-marquee";
+import { Hero } from "@/components/hero";
+import { LiteYouTube } from "@/components/lite-youtube";
+import { ButtonLink } from "@/components/ui/button";
+import { Reveal, RevealHeading, StaggerItem, StaggerList } from "@/components/motion/reveal";
 import { getUpcomingShows } from "@/lib/shows";
-import { SPOTIFY_EMBED, YOUTUBE_VIDEO_ID } from "@/lib/site";
-
-const HERO_BARS = [
-  { left: "40%", height: "30%" },
-  { left: "45%", height: "40%" },
-  { left: "50%", height: "50%" },
-  { left: "55%", height: "36%" },
-];
+import { SOCIAL, SPOTIFY_RELEASES, YOUTUBE_VIDEO_ID, YOUTUBE_VIDEO_TITLE } from "@/lib/site";
+import { SpotifyCard } from "@/components/spotify-card";
 
 export default async function Home() {
   const shows = await getUpcomingShows();
@@ -20,81 +16,49 @@ export default async function Home() {
 
   return (
     <>
-      <SiteHeader />
       <main className="flex-1">
-        <section aria-label="Canto 4" className="relative">
-          <h1 className="sr-only">Canto 4 - Banda Oficial</h1>
-          <div className="relative mx-auto max-w-4xl overflow-hidden px-4 pt-6 sm:pt-10">
-            <Image
-              src="/img/logo-c4.png"
-              alt=""
-              width={1080}
-              height={504}
-              priority
-              sizes="(min-width: 896px) 640px, 72vw"
-              className="mx-auto h-auto w-[72%]"
-            />
-            <Image
-              src="/img/Foto_canto_4_2025.png"
-              alt="Los cuatro integrantes de Canto 4"
-              width={1404}
-              height={1080}
-              priority
-              sizes="(min-width: 896px) 896px, 100vw"
-              className="relative -mt-[22%] h-auto w-full"
-            />
-            {HERO_BARS.map((bar, i) => (
-              <span
-                key={bar.left}
-                aria-hidden
-                className="bar-rise absolute bottom-0 w-6 bg-primary/70 md:w-8"
-                style={{ left: bar.left, height: bar.height, animationDelay: `${0.3 + i * 0.12}s` }}
-              />
-            ))}
-          </div>
-        </section>
+        <Hero />
 
         <div className="slant-top relative z-10 -mt-[14vw] bg-primary pt-[16vw] text-primary-foreground md:-mt-[10vw] md:pt-[12vw]">
-          <section id="miranos" className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 md:grid-cols-2 md:gap-12 md:py-16">
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_20%,rgb(255_255_255/0.12),transparent_70%)]" />
+          <section id="miranos" className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 md:grid-cols-2 md:gap-12 md:py-16">
             <div className="text-center md:text-left">
-              <h2 className="display text-6xl sm:text-7xl lg:text-8xl">
-                Mira<br />nos
-              </h2>
-              <p className="mx-auto mt-5 max-w-md text-lg text-white/90 md:mx-0">
-                Viví la energía de Canto 4 en cada presentación. Reviví los mejores momentos de nuestros shows.
-              </p>
+              <RevealHeading lines={["Mira", "nos"]} className="display text-6xl sm:text-7xl lg:text-8xl" />
+              <Reveal delay={0.2}>
+                <p className="mx-auto mt-5 max-w-md text-lg text-white/90 md:mx-0">
+                  Viví la energía de Canto 4 en cada presentación. Reviví los mejores momentos de nuestros shows.
+                </p>
+              </Reveal>
+              <Reveal delay={0.3} className="mt-7 flex justify-center md:justify-start">
+                <ButtonLink href={SOCIAL.youtube} variant="light" trailing={<ArrowRight aria-hidden />}>
+                  Más videos en YouTube
+                </ButtonLink>
+              </Reveal>
             </div>
-            <div className="aspect-video overflow-hidden rounded-2xl bg-black/30 shadow-2xl ring-1 ring-white/20">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}`}
-                title="Canto 4 en YouTube"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                className="size-full"
-              />
-            </div>
+            <Reveal from="right" delay={0.1}>
+              <div className="aspect-video overflow-hidden rounded-3xl bg-black/30 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.6)] ring-1 ring-white/20 transition-transform duration-500 hover:-rotate-1 hover:scale-[1.02]">
+                <LiteYouTube id={YOUTUBE_VIDEO_ID} title={YOUTUBE_VIDEO_TITLE} />
+              </div>
+            </Reveal>
           </section>
 
-          <section id="escuchanos" className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-16 pt-4 sm:px-6 md:grid-cols-2 md:gap-12 md:pb-24">
+          <section id="escuchanos" className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 pb-20 pt-4 sm:px-6 md:grid-cols-2 md:gap-12 md:pb-28">
             <div className="text-center md:order-2 md:text-right">
-              <h2 className="display text-6xl sm:text-7xl lg:text-8xl">
-                Escucha<br />nos
-              </h2>
-              <p className="mx-auto mt-5 max-w-md text-lg text-white/90 md:mr-0">
-                Todos nuestros discos y singles, en todas las plataformas.
-              </p>
+              <RevealHeading lines={["Escucha", "nos"]} className="display text-6xl sm:text-7xl lg:text-8xl" />
+              <Reveal delay={0.2}>
+                <p className="mx-auto mt-5 max-w-md text-lg text-white/90 md:mr-0">
+                  Todos nuestros discos y singles, en todas las plataformas.
+                </p>
+              </Reveal>
+              <Reveal delay={0.3} className="mt-7 flex justify-center md:justify-end">
+                <ButtonLink href={SPOTIFY_RELEASES} variant="light" icon={<Headphones aria-hidden />} trailing={<ArrowRight aria-hidden />}>
+                  Últimos lanzamientos
+                </ButtonLink>
+              </Reveal>
             </div>
-            <div className="overflow-hidden rounded-2xl bg-black/30 shadow-2xl md:order-1">
-              <iframe
-                src={SPOTIFY_EMBED}
-                title="Canto 4 en Spotify"
-                loading="lazy"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                className="h-[352px] w-full"
-              />
-            </div>
+            <Reveal from="left" delay={0.1} className="md:order-1">
+              <SpotifyCard />
+            </Reveal>
           </section>
         </div>
 
@@ -106,31 +70,36 @@ export default async function Home() {
             sizes="100vw"
             className="object-cover opacity-[0.07] mix-blend-screen"
           />
-          <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-8 sm:px-6">
+          <div aria-hidden className="pointer-events-none absolute -left-40 top-1/3 size-[30rem] rounded-full bg-primary/25 blur-[120px]" />
+
+          {shows && <ShowsMarquee shows={shows} />}
+
+          <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-14 sm:px-6">
             <section aria-labelledby="proximos-shows">
               <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left">
-                <h2 id="proximos-shows" className="display text-5xl sm:text-6xl lg:text-7xl">
-                  Próximos <span className="block text-[#e5333f]">shows</span>
-                </h2>
-                <Link
-                  href="/shows"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-background px-5 font-semibold text-primary transition-colors hover:bg-white"
-                >
-                  <CalendarDays className="size-4" aria-hidden />
-                  Ver todos los shows
-                </Link>
+                <RevealHeading
+                  id="proximos-shows"
+                  lines={["Próximos", "shows"]}
+                  lineClassNames={["", "text-[#ff4655]"]}
+                  className="display text-5xl sm:text-6xl lg:text-7xl"
+                />
+                <Reveal delay={0.2}>
+                  <ButtonLink href="/shows" variant="light" icon={<CalendarDays aria-hidden />} trailing={<ArrowRight aria-hidden />}>
+                    Ver todos los shows
+                  </ButtonLink>
+                </Reveal>
               </div>
 
               {next.length > 0 ? (
-                <ul className="mt-10 grid gap-5 md:grid-cols-3">
+                <StaggerList className="mt-10 grid gap-5 md:grid-cols-3">
                   {next.map((show) => (
-                    <li key={show.id}>
+                    <StaggerItem key={show.id}>
                       <ShowCard show={show} compact />
-                    </li>
+                    </StaggerItem>
                   ))}
-                </ul>
+                </StaggerList>
               ) : (
-                <p className="mt-10 rounded-2xl bg-white/5 p-6 text-center text-white/80">
+                <p className="mt-10 rounded-3xl bg-white/5 p-6 text-center text-white/80 ring-1 ring-white/10">
                   {shows === null
                     ? "No pudimos cargar la agenda en este momento. Probá de nuevo en un rato."
                     : "Pronto anunciamos nuevas fechas. Seguinos en redes para enterarte primero."}
@@ -140,29 +109,30 @@ export default async function Home() {
 
             <section
               aria-labelledby="nuestra-historia"
-              className="mt-20 flex flex-col items-center gap-6 border-t border-white/10 pt-16 text-center md:flex-row md:justify-between md:text-left"
+              className="mt-24 flex flex-col items-center gap-8 border-t border-white/10 pt-16 text-center md:flex-row md:justify-between md:text-left"
             >
               <div>
-                <h2 id="nuestra-historia" className="display text-5xl sm:text-6xl lg:text-7xl">
-                  <span className="text-[#e5333f]">Nuestra</span> historia
-                </h2>
-                <p className="mt-4 max-w-xl text-lg text-white/80">
-                  Más de 25 años de música popular argentina, desde Salta para todo el país.
-                </p>
+                <RevealHeading
+                  id="nuestra-historia"
+                  lines={["Nuestra", "historia"]}
+                  lineClassNames={["text-[#ff4655]", ""]}
+                  className="display text-5xl sm:text-6xl lg:text-7xl"
+                />
+                <Reveal delay={0.2}>
+                  <p className="mt-5 max-w-xl text-lg text-white/80">
+                    Más de 25 años de música popular argentina, desde Salta para todo el país.
+                  </p>
+                </Reveal>
               </div>
-              <Link
-                href="/bio"
-                className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-background px-5 font-semibold text-primary transition-colors hover:bg-white"
-              >
-                <BookOpen className="size-4" aria-hidden />
-                Leer la historia
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
+              <Reveal delay={0.3} className="shrink-0">
+                <ButtonLink href="/bio" variant="primary" size="lg" icon={<BookOpen aria-hidden />} trailing={<ArrowRight aria-hidden />}>
+                  Leer la historia
+                </ButtonLink>
+              </Reveal>
             </section>
           </div>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

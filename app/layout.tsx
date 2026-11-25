@@ -1,6 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SITE_URL } from "@/lib/site";
+import { MotionProviders, ScrollProgress } from "@/components/motion/providers";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import { Analytics } from "@vercel/analytics/next";
+import { PageTracker } from "@/components/page-tracker";
 import "./globals.css";
 
 const avigea = localFont({ src: "./fonts/Avigea.ttf", variable: "--font-avigea", display: "swap" });
@@ -25,8 +31,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-AR" className={`${avigea.variable} ${bahnschrift.variable}`}>
-      <body className="flex min-h-dvh flex-col">{children}</body>
+    // data-scroll-behavior: Next 16 solo desactiva el scroll suave al cambiar de página si se declara acá; sin esto la página nueva abre a mitad de camino.
+    <html lang="es-AR" data-scroll-behavior="smooth" className={`${avigea.variable} ${bahnschrift.variable}`}>
+      <body className="flex min-h-dvh flex-col">
+        <MotionProviders>
+          <ScrollProgress />
+          <ScrollToTop />
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </MotionProviders>
+        <Analytics />
+        <PageTracker />
+      </body>
     </html>
   );
 }

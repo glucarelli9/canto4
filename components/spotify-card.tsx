@@ -12,7 +12,7 @@ export async function SpotifyCard() {
   const songs = await Promise.all(
     FEATURED_SONGS.map(async ({ preview, ...s }: (typeof FEATURED_SONGS)[number] & { preview?: string }) => {
       const live = await getTrackPreview(s.spotify);
-      return { ...s, audio: live.audio ?? preview ?? undefined, cover: live.cover };
+      return { ...s, audio: live.audio ?? preview ?? null, cover: live.cover };
     }),
   );
 
